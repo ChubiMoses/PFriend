@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "922649017077",
+    "firebase_url": "https://police-friend-5fb64-default-rtdb.firebaseio.com",
+    "project_id": "police-friend-5fb64",
+    "storage_bucket": "police-friend-5fb64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922649017077:android:1f0022a38760ff7a26e3bc",
+        "android_client_info": {
+          "package_name": "com.ccr.PFriend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922649017077-f6v4npvetb1q1bcor5ht5e5gpdtc8gge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlN1rC2WaTQEq-bAU-y9zm0Aw7--6m7TY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922649017077-f6v4npvetb1q1bcor5ht5e5gpdtc8gge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
