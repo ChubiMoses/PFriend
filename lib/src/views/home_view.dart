@@ -6,9 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:popo/models/user.dart';
 import 'package:popo/src/views/account/Authentication.dart';
-import 'package:popo/src/views/stations.dart';
-import 'package:popo/src/views/news.dart';
-import 'package:popo/src/views/emergency_buttons.dart';
+import 'package:popo/src/views/station/stations.dart';
+import 'package:popo/src/views/news/news.dart';
+import 'package:popo/src/views/report/emergency_buttons.dart';
 import 'package:popo/src/widgets/bottom_tabs.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,10 +23,8 @@ class _HomeViewState extends State<HomeView> {
   DateTime backbuttonpressedTime;
   PageController pageController;
   int getPageIndex = 0;
-  int exitCount = 0;
   bool isScrollingDown = false;
-  LatLng latLng;
-  User user;
+
 
   @override
   void initState() {

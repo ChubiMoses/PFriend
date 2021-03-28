@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:popo/models/user.dart';
-import 'package:popo/src/home_view.dart';
+import 'package:popo/src/views/home_view.dart';
 import 'package:popo/src/views/account/Authentication.dart';
 import 'package:popo/src/views/account/login.dart';
 

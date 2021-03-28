@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:popo/src/home_view.dart';
+import 'package:popo/src/views/home_view.dart';
 import 'package:popo/src/views/account/Authentication.dart';
 import 'package:popo/src/views/account/Register.dart';
 import 'package:popo/src/views/account/reset_password.dart';

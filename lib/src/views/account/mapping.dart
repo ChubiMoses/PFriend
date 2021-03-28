@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:popo/src/home_view.dart';
+import 'package:popo/src/views/home_view.dart';
 import 'package:popo/src/views/account/Authentication.dart';
-import 'package:popo/src/views/welcome.dart';
+import 'package:popo/src/views/account/welcome.dart';
 
 class Mapping extends StatefulWidget {
   @override

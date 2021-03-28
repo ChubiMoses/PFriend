@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:popo/models/user.dart';
 import 'package:popo/src/views/account/Authentication.dart';
-import 'package:popo/src/views/send_report.dart';
+import 'package:popo/src/views/report/send_report.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 

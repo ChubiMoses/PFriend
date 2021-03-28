@@ -7,7 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:popo/models/station.dart';
 import 'package:provider/provider.dart';
-import 'package:popo/src/views/station_detail.dart';
+import 'package:popo/src/views/station/station_detail.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Stations extends StatefulWidget {
