@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:popo/models/location.dart';
@@ -23,7 +24,8 @@ class _StationDetailState extends State<StationDetail> {
   @override
   void initState() {
     super.initState();
-    _setMarkers(double.parse(widget.station.lat), double.parse(widget.station.long));
+    _setMarkers(
+        double.parse(widget.station.lat), double.parse(widget.station.long));
   }
 
   void _setMarkers(double lat, double long) {
@@ -32,11 +34,10 @@ class _StationDetailState extends State<StationDetail> {
     setState(() {
       _markers.add(Marker(
           markerId: MarkerId(markerIdVal),
-          position: LatLng(double.parse(widget.station.lat), double.parse(widget.station.long)),
+          position: LatLng(double.parse(widget.station.lat),
+              double.parse(widget.station.long)),
           infoWindow: InfoWindow(
-            title:widget.station.name,
-            snippet:widget.station.snippet
-          )));
+              title: widget.station.name, snippet: widget.station.snippet)));
     });
   }
 
@@ -46,8 +47,9 @@ class _StationDetailState extends State<StationDetail> {
       children: [
         GoogleMap(
           initialCameraPosition: CameraPosition(
-              target: LatLng(double.parse(widget.station.lat), double.parse(widget.station.long)),
-               zoom: 16.0),
+              target: LatLng(double.parse(widget.station.lat),
+                  double.parse(widget.station.long)),
+              zoom: 16.0),
           zoomGesturesEnabled: false,
           myLocationEnabled: true,
           markers: _markers,
@@ -65,26 +67,30 @@ class _StationDetailState extends State<StationDetail> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(widget.station.image),
+                            image: CachedNetworkImageProvider(
+                                widget.station.image),
                             fit: BoxFit.cover),
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width:MediaQuery.of(context).size.width - 130,
+                        width: MediaQuery.of(context).size.width - 130,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(widget.station.name,overflow: TextOverflow.ellipsis,style:
-                            TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
-                            Text("", style:Theme.of(context).textTheme.caption
-                            ),
+                            Text(widget.station.name,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600)),
+                            Text(widget.station.snippet,
+                                style: Theme.of(context).textTheme.caption),
                           ],
                         ),
                       ),
@@ -93,18 +99,22 @@ class _StationDetailState extends State<StationDetail> {
                           CircleAvatar(
                             child: IconButton(
                               icon: Icon(Icons.call, size: 14.0),
-                              onPressed:()=>_launchPhone("tel:${widget.station.phone}"),
-                              ),
+                              onPressed: () =>
+                                  _launchPhone("tel:${widget.station.phone}"),
+                            ),
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             radius: 14.0,
                           ),
-                            SizedBox(width:5.0,),
+                          SizedBox(
+                            width: 5.0,
+                          ),
                           CircleAvatar(
                             child: IconButton(
                               icon: Icon(Icons.email, size: 14.0),
-                              onPressed:()=>_launchMail(),
-                              ),
+                              onPressed: () =>
+                                  _launchMail(widget.station.email),
+                            ),
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             radius: 14.0,
@@ -122,24 +132,23 @@ class _StationDetailState extends State<StationDetail> {
     );
   }
 
-  
-   _launchMail() async{
-     final Uri params = Uri(
-       scheme:"mailto",
-       path:  "helloccapps@gmail.com",
-       query: "subject=MyCBT 1.0",
-     );
-      final url = params.toString();
-      if(await canLaunch(url)){
-        await launch(url);
-      }else{
-        throw "Could not lanch" + url;
-      }
-   }
-
-   void _launchPhone(String phone) async{
-    await canLaunch(phone) ? 
-    await launch(phone) : throw 'Could not launch $phone';
+  _launchMail(String email) async {
+    final Uri params = Uri(
+      scheme: "mailto",
+      path: email,
+      query: "subject=Emergency Report",
+    );
+    final url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw "Could not lanch" + url;
     }
+  }
 
+  void _launchPhone(String phone) async {
+    await canLaunch(phone)
+        ? await launch(phone)
+        : throw 'Could not launch $phone';
+  }
 }

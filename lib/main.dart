@@ -5,7 +5,6 @@ import 'package:popo/models/place.dart';
 import 'package:popo/services/geolocator_service.dart';
 import 'package:popo/services/places_service.dart';
 import 'package:popo/src/views/account/mapping.dart';
-import 'package:popo/src/views/welcome.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 

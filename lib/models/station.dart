@@ -10,7 +10,7 @@ class Station{
   String image;
    String snippet;
 
-  Station({this.name,this.lat,this.snippet, this.long, this.phone,this.image, this.email});
+  Station({this.name, this.key, this.lat, this.snippet, this.long, this.phone,this.image, this.email});
 
   Station.fromSnapshot(DataSnapshot snapshot) :
     key = snapshot.key,

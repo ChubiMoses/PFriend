@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:popo/src/home_tabs.dart';
+import 'package:popo/src/home_view.dart';
 import 'package:popo/src/views/account/Authentication.dart';
 import 'package:popo/src/views/welcome.dart';
 
@@ -41,7 +41,7 @@ class _MappingState extends State<Mapping> {
         return new Welcome();
         break;
       case AuthStatus.signedIn:
-        return new HomeTabs();
+        return new HomeView();
         break;
     }
     return null;

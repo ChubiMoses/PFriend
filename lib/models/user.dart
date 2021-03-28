@@ -11,7 +11,7 @@ class User{
   String gender;
   String userId;
 
-  User({this.name, this.userId, this.lat, this.gender, this.image, this.long, this.phone, this.email});
+  User({this.name, this.key, this.userId, this.lat, this.gender, this.image, this.long, this.phone, this.email});
 
   User.fromSnapshot(DataSnapshot snapshot) :
     key = snapshot.key,

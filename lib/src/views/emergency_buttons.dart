@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:popo/models/user.dart';
 import 'package:popo/src/views/account/Authentication.dart';
-import 'package:popo/src/views/constants/colors.dart';
-import 'package:popo/src/views/sendReport.dart';
+import 'package:popo/src/views/send_report.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -21,40 +20,33 @@ class _SendReportState extends State<SendReport> {
     User user;
     AuthImplementation auth = Auth();
     DatabaseReference databaseReference;
+     
       Future getUserInfo() async {
       String userId =  await auth.getCurrentUser();
        databaseReference = FirebaseDatabase.instance.reference().child("Users").child(userId);
        databaseReference.once().then((DataSnapshot dataSnapshot){
-       // user =  User.fromSnapshot(dataSnapshot).toJson();
-       // print(user);
-        var keys = dataSnapshot.value.keys;
-        var data = dataSnapshot.value;
-        for  (var key in keys){
-          User d = new User(
-            name: data[key]['name'],
-            long: data[key]['long'],
-            phone: data[key]['phone'],
-            email: data[key]['email'],
-            lat: data[key]['lat'],
-            image: data[key]['image']
-          );
-         setState(() {
-           user = d;
-         });
-        }
-      
-        setState((){
-          //  user =  User.fromSnapshot(dataSnapshot).toJson();
-          // for(var val in dataSnapshot.value.entries){
-          //   user =  User(email:val.email,name:val.name,image:val.emage,phone:val.phone,lat:val.lat,long:val.long, gender:val.gender);
-          // }
-        });
+           setState(() {
+              user = User(
+              key: dataSnapshot.key,
+              name: dataSnapshot.value['name'],
+              long: dataSnapshot.value['long'],
+              phone: dataSnapshot.value['phone'],
+              email:dataSnapshot.value['email'],
+              lat: dataSnapshot.value['lat'],
+              image: dataSnapshot.value['image']
+            );
+           });
        });
     }
+
   @override
   void initState() { 
     super.initState();
-      getUserInfo();
+    FirebaseDatabase database;
+    database = FirebaseDatabase.instance;
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000);
+    getUserInfo();
   }
  
    @override
@@ -100,12 +92,12 @@ class _SendReportState extends State<SendReport> {
                          backgroundColor:Colors.white,
                         child: CircleAvatar(
                           radius:50.0,
-                          backgroundColor: Colors.white,
+                          backgroundColor:Colors.red,
                           child:Icon(Icons.person, size:50.0),
                         ),
                       ),
                       SizedBox(height:5.0),
-                      Text(user != null ? user.name : "Chubi Moses", style: TextStyle(color:white,fontSize:18.0)),
+                      Text(user != null ? user.name : "User", style: TextStyle(color:Colors.white,fontSize:18.0)),
                     ],
                   ),
                 ),
@@ -126,7 +118,7 @@ class _SendReportState extends State<SendReport> {
                               borderRadius: BorderRadius.circular(30.0),
                               shape: BoxShape.rectangle,
                               border:i == index ? null : Border.all(
-                                color:white, width: 1.0
+                                color:Colors.white, width: 1.0
                               ) 
                             ),
                             child: InkWell(
@@ -136,12 +128,12 @@ class _SendReportState extends State<SendReport> {
                                       context: context,
                                       builder: (sheetContext) => BottomSheet(
                                     onClosing: () {},
-                                    builder: (_)=>SendNow(report:items[i]['name'], position:widget.position,user:widget.user))
+                                    builder: (_)=>SendNow(report:items[i]['name'], position:widget.position,user:user))
                                     );
                               },
                               child: Center(
                                 child: Text(items[i]['name'],
-                                style:TextStyle(color: i == index ? white : white, fontSize: 12.0),
+                                style:TextStyle(color: i == index ? Colors.white : Colors.white, fontSize: 12.0),
                                 ),
                               ),
                             ),
@@ -154,7 +146,6 @@ class _SendReportState extends State<SendReport> {
         );
       }
 }
-
 
   var items = [
     {
